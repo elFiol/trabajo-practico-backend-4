@@ -10,7 +10,7 @@ export const leerColoresAPI = async () => {
     }
 }
 
-export const obtenerRecetaAPI = async (id) => {
+export const obtenerColorAPI = async (id) => {
     try {
       const respuesta = await fetch(URL_COLORES + "/api/color/" + id);
       return respuesta;
