@@ -1,0 +1,30 @@
+.formularioDiv {
+  background: rgb(255, 255, 255);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.644);
+  padding: 40px 20px;
+}
+.formularioSubDiv {
+  display: flex;
+  justify-content: space-around;
+}
+.colorForm {
+  border: 1px solid black;
+  background: blue;
+  width: 15%;
+}
+.color {
+  background: rgb(255, 255, 255);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.644);
+}
+@media (max-width: 576px) {
+  .formularioSubDiv {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .colorForm {
+    margin: 20px 0px;
+    width: 75%;
+    height: 30px;
+  }
+}
