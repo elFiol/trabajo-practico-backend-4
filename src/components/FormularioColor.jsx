@@ -7,18 +7,21 @@ import { leerColoresAPI } from "../helper/queries";
 
 const FormularioColor = () => {
     const [color, setColor] = useState("")
+    const [nombre, setNombre] = useState("")
     const [colores, setColores] = useState([])
     const handlerSubmit = (e) => {
         e.preventDefault()
         setColores([...colores, { id: uuidv4(), nombre: color }])
     }
     useEffect(() => {
-        const hacerPeticion = async() => {try{
-            const respuesta = await leerColoresAPI();
-            console.log(respuesta)
-            if(respuesta.length > 0){
-                setColores(respuesta)
-            }}catch(error){
+        const hacerPeticion = async () => {
+            try {
+                const respuesta = await leerColoresAPI();
+                console.log(respuesta)
+                if (respuesta.length > 0) {
+                    setColores(respuesta)
+                }
+            } catch (error) {
                 console.log(error)
             }
         }
@@ -35,13 +38,25 @@ const FormularioColor = () => {
                 <div className="formularioSubDiv">
                     <div className="colorForm"></div>
                     <Form className="w-75" onSubmit={handlerSubmit}>
-                        <Form.Label>Ingrese el color</Form.Label>
-                        <Form.Control
-                            type="color"
-                            defaultValue="#0000ff"
-                            title="Choose your color"
-                            onChange={(e)=>setColor(e.target.value)}
-                        />
+                        <Form.Group>
+                            <Form.Label>Ingrese el color</Form.Label>
+                            <Form.Control
+                                type="color"
+                                defaultValue="#0000ff"
+                                title="Elije tu color"
+                                onChange={(e) => setColor(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Ingrese el nombre del color</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="ingrese el nombre del color"
+                                minLength={3}
+                                maxLength={30}
+                                onChange={(e) => setNombre(e.target.value)}
+                            />
+                        </Form.Group>
                         <Button type="submit" className="mt-3">Guardar</Button>
                     </Form>
                 </div>
