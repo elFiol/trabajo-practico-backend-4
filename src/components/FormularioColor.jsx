@@ -6,7 +6,7 @@ import ListaColores from "./ListaColores"
 import { CrearColorAPI, borrarColorAPI, editarColorAPI, leerColoresAPI } from "../helper/queries";
 
 const FormularioColor = () => {
-    const [color, setColor] = useState("")
+    const [color, setColor] = useState("#ffffff")
     const [nombre, setNombre] = useState("")
     const [colores, setColores] = useState([])
     const handlerSubmit = (e) => {
@@ -86,6 +86,7 @@ const FormularioColor = () => {
                     icon: "error"
                 });
             }
+            hacerPeticion()
         } catch (error) {
             console.log(error)
         }
@@ -101,7 +102,7 @@ const FormularioColor = () => {
                             <Form.Label>Ingrese el color</Form.Label>
                             <Form.Control
                                 type="color"
-                                defaultValue="#0000ff"
+                                defaultValue={color}
                                 title="Elije tu color"
                                 onChange={(e) => setColor(e.target.value)}
                             />
