@@ -1,9 +1,9 @@
 import { Button, Col } from "react-bootstrap";
 import "./Principal.css"
 
-const Color = ({ nombre, id, borrarColor}) => {
+const Color = ({ color ,nombre, id, borrarColor}) => {
     const estiloColor = {
-        backgroundColor: nombre,
+        backgroundColor: color,
         margin: "auto",
     };
     return (

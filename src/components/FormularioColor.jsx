@@ -3,7 +3,7 @@ import "./Principal.css"
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import ListaColores from "./ListaColores"
-import { CrearColorAPI, leerColoresAPI } from "../helper/queries";
+import { CrearColorAPI, borrarColorAPI, leerColoresAPI } from "../helper/queries";
 
 const FormularioColor = () => {
     const [color, setColor] = useState("")
@@ -50,9 +50,25 @@ const FormularioColor = () => {
     useEffect(() => {
         hacerPeticion()
     }, [])
-    const borrarColor = (id) => {
-        const coloresFiltrados = colores.filter((color) => color.id !== id)
-        setColores(coloresFiltrados)
+
+    const borrarColor = async (id) => {
+        try {
+            const respuesta = await borrarColorAPI(id)
+            if (respuesta.status === 200) {
+                Swal.fire({
+                    title: "el color fue borrado correctamente",
+                    icon: "success"
+                });
+            } else {
+                Swal.fire({
+                    title: "no se pudo borrar el color",
+                    icon: "error"
+                });
+            }
+            hacerPeticion()
+        } catch (error) {
+            console.log(error)
+        }
     }
     return (
         <article>
