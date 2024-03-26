@@ -3,7 +3,7 @@ import "./Principal.css"
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import ListaColores from "./ListaColores"
-import { CrearColorAPI, borrarColorAPI, leerColoresAPI } from "../helper/queries";
+import { CrearColorAPI, borrarColorAPI, editarColorAPI, leerColoresAPI } from "../helper/queries";
 
 const FormularioColor = () => {
     const [color, setColor] = useState("")
@@ -70,6 +70,26 @@ const FormularioColor = () => {
             console.log(error)
         }
     }
+
+    const editarColor = async (id, colorModificado) => {
+        try {
+            const respuesta = await editarColorAPI(colorModificado, id);
+            console.log(respuesta)
+            if (respuesta.status === 200) {
+                Swal.fire({
+                    title: "el color fue editado correctamente",
+                    icon: "success"
+                });
+            } else {
+                Swal.fire({
+                    title: "no se pudo editar el color",
+                    icon: "error"
+                });
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <article>
             <div className="formularioDiv">
@@ -101,7 +121,7 @@ const FormularioColor = () => {
                     </Form>
                 </div>
             </div>
-            <ListaColores colores={colores} borrarColor={borrarColor}></ListaColores>
+            <ListaColores colores={colores} editarColor={editarColor} borrarColor={borrarColor}></ListaColores>
         </article>
     );
 };
