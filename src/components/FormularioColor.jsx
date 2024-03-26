@@ -17,7 +17,17 @@ const FormularioColor = () => {
                     nombreColor: nombre,
                     codigoHexadecimal: color
                 })
-                console.log(respuesta)
+                if (respuesta.status === 201) {
+                    Swal.fire({
+                        title: "el color fue creado correctamente",
+                        icon: "success"
+                    });
+                } else {
+                    Swal.fire({
+                        title: "el color no fue creado correctamente",
+                        icon: "error"
+                    });
+                }
                 await hacerPeticion()
             } catch (error) {
                 console.log(error)
@@ -29,7 +39,6 @@ const FormularioColor = () => {
     const hacerPeticion = async () => {
         try {
             const respuesta = await leerColoresAPI();
-            console.log(respuesta)
             if (respuesta.length > 0) {
                 setColores(respuesta)
             }
